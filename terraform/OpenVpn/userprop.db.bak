@@ -1,0 +1,43 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE profile (
+        id INTEGER NOT NULL,
+        name VARCHAR(128) NOT NULL,
+        type VARCHAR(128),
+        PRIMARY KEY (id)
+);
+INSERT INTO "profile" VALUES(1,'__DEFAULT__','user_default');
+INSERT INTO "profile" VALUES(2,'openvpn','user_compile');
+INSERT INTO "profile" VALUES(3,'lidop','user_compile');
+CREATE TABLE config (
+        profile_id INTEGER NOT NULL,
+        name VARCHAR(128) NOT NULL,
+        value TEXT,
+        PRIMARY KEY (profile_id, name),
+        FOREIGN KEY(profile_id) REFERENCES profile (id)
+);
+INSERT INTO "config" VALUES(1,'type','user_default');
+INSERT INTO "config" VALUES(1,'prop_autogenerate','true');
+INSERT INTO "config" VALUES(2,'prop_superuser','true');
+INSERT INTO "config" VALUES(2,'type','user_compile');
+INSERT INTO "config" VALUES(2,'pvt_google_auth_secret_locked','false');
+INSERT INTO "config" VALUES(2,'pvt_google_auth_secret','5K2XB6SDW5OZPRZE');
+INSERT INTO "config" VALUES(1,'def_deny','false');
+INSERT INTO "config" VALUES(2,'prop_autologin','true');
+INSERT INTO "config" VALUES(3,'prop_autologin','true');
+INSERT INTO "config" VALUES(3,'prop_superuser','true');
+INSERT INTO "config" VALUES(3,'pvt_password_digest','ea4b44433621697d6c536adca424b961633e944cc7c660ae5c2cfcf5a272c613');
+INSERT INTO "config" VALUES(3,'type','user_compile');
+INSERT INTO "config" VALUES(3,'pvt_google_auth_secret_locked','false');
+INSERT INTO "config" VALUES(3,'pvt_google_auth_secret','G3SO6VYT7NKE3MIJ');
+INSERT INTO "config" VALUES(3,'conn_ip','172.27.208.10');
+INSERT INTO "config" VALUES(3,'c2s_route.1','10.20.30.0/24');
+INSERT INTO "config" VALUES(3,'c2s_route.0','10.0.2.0/24');
+INSERT INTO "config" VALUES(3,'access_from.0','+ALL_S2C_SUBNETS');
+INSERT INTO "config" VALUES(3,'access_from.1','+ALL_VPN_CLIENTS');
+CREATE UNIQUE INDEX ix_profile_name ON profile (name);
+CREATE INDEX ix_profile_id ON profile (id);
+CREATE INDEX ix_profile_type ON profile (type);
+CREATE INDEX ix_config_profile_id ON config (profile_id);
+CREATE INDEX ix_config_name ON config (name);
+COMMIT;

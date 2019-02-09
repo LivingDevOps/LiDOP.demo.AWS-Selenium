@@ -1,0 +1,85 @@
+{
+    "Create_Environment":
+    {
+        "Script": "./build/Create_Environment.Jenkinsfile",
+        "Parameters": [
+            {
+                "Name":"Count",
+                "Type":"String",
+                "Default": "0",
+                "Description":"Count"
+            },
+            {
+                "Name":"AWS_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Key"
+            },
+            {
+                "Name":"AWS_Secret",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Secret"
+            },
+            {
+                "Name":"Private_Key_Name",
+                "Type":"String",
+                "Description":"Private Key Name",
+                "Default": ""
+            },
+            {
+                "Name":"Private_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey",
+                "Description":"AWS Private Key"
+            }
+        ]
+    },
+    "Destroy_Environment":
+    {
+        "Script": "./build/Destroy_Environment.Jenkinsfile",
+        "Parameters": [
+            {
+                "Name":"AWS_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Key"
+            },
+            {
+                "Name":"AWS_Secret",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Secret"
+            },
+            {
+                "Name":"Private_Key_Name",
+                "Type":"String",
+                "Description":"Private Key Name",
+                "Default": ""
+            },
+            {
+                "Name":"Private_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey",
+                "Description":"AWS Private Key"
+            }
+        ]
+    },    
+    "Connect_Vpn":
+    {
+        "Script": "./build/Connect_Vpn.Jenkinsfile",
+        "Parameters": [
+            {
+                "Name":"VPN_IP",
+                "Type":"String",
+                "Default": "0.0.0.0"
+            }
+        ]
+    },
+
+    "Build_Application":
+    {
+        "Script": "./build/Build_Application.Jenkinsfile",
+        "TriggerOnPush" : true
+    }
+}

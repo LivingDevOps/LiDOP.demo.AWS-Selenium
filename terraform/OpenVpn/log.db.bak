@@ -1,0 +1,33 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE log (
+	session_id VARCHAR(16) NOT NULL, 
+	node VARCHAR(128), 
+	username VARCHAR(128), 
+	common_name VARCHAR(128), 
+	start_time INTEGER, 
+	duration INTEGER, 
+	service VARCHAR(12), 
+	api_method VARCHAR(64), 
+	active INTEGER, 
+	auth INTEGER, 
+	real_ip VARCHAR(15), 
+	vpn_ip VARCHAR(15), 
+	proto VARCHAR(3), 
+	port VARCHAR(5), 
+	bytes_in BIGINT, 
+	bytes_out BIGINT, 
+	bytes_total BIGINT, 
+	error TEXT, 
+	extra TEXT, 
+	timestamp INTEGER, 
+	PRIMARY KEY (session_id)
+);
+CREATE INDEX ix_log_vpn_ip ON log (vpn_ip);
+CREATE INDEX ix_log_username ON log (username);
+CREATE INDEX ix_log_timestamp ON log (timestamp);
+CREATE INDEX ix_log_session_id ON log (session_id);
+CREATE INDEX ix_log_real_ip ON log (real_ip);
+CREATE INDEX ix_log_service ON log (service);
+CREATE INDEX ix_log_start_time ON log (start_time);
+COMMIT;
