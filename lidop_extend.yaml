@@ -7,6 +7,12 @@
 
 - name: AWS Demo Extension
   block:
+
+  - name: install nodejs
+    shell: |
+        curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+
   - name: Create Jenkins Crumb
     uri:
       url: 'http://{{ ipaddress }}:8080/jenkins/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'

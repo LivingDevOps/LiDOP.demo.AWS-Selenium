@@ -80,16 +80,11 @@ pipeline {
     stage("Integration Test") {
       steps {
         script {
-          try{
-            dir("./app"){
-              // itestp1 runs 1 testfile 
-              sh "npm run-script itestp1"
-              // itestp2 runs 50 testfile 
-              // sh "npm run-script itestp1"
-            }
-          }
-          finally{
-            archiveArtifacts  '.results/reports/*.json'
+          dir("./app"){
+            // itestp1 runs 1 testfile 
+            sh "npm run-script itestp1"
+            // itestp2 runs 50 testfile 
+            // sh "npm run-script itestp1"
           }
         }
       }
