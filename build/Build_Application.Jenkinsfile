@@ -82,10 +82,12 @@ pipeline {
         script {
           try{
             dir("./app"){
+              sh "curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -"
+              sh "sudo apt-get install -y nodejs"
               // itestp1 runs 1 testfile 
-              sh "docker run --dns ${IPADDRESS} --rm -v $WORKSPACE/.results:/work/.results helloworldnodejs npm run-script itestp1"
+              sh "npm run-script itestp1"
               // itestp2 runs 50 testfile 
-              // sh "docker run --dns ${IPADDRESS} --rm -v $WORKSPACE/.results:/work/.results helloworldnodejs npm run-script itestp2"
+              // sh "npm run-script itestp1"
             }
           }
           finally{
