@@ -37,7 +37,7 @@ pipeline {
       steps {
         dir("${WORKSPACE}"){
           withCredentials([string(credentialsId: "${params.AWS_Secret}", variable: 'AWS_SECRET'), string(credentialsId: "${params.AWS_Key}", variable: 'AWS_KEY'), sshUserPrivateKey(credentialsId: "${params.Private_Key}", keyFileVariable: 'PRIVATE_KEY', passphraseVariable: '', usernameVariable: 'USERNAME')]) {
-            sh "docker run --rm -w /work -v ${PRIVATE_KEY}:/certs/cert.pem -v ${WORKSPACE}/terraform/:/work hashicorp/terraform plan -out=tfplan -input=false -var \"access_key=${AWS_KEY}\" -var \"secret_key=${AWS_SECRET}\" -var \"private_key_name=${params.Private_Key_Name}\" -var \"count=${params.Count}\" -var \"private_key=/certs/cert.pem\"  "
+            sh "docker run --rm -w /work -v ${PRIVATE_KEY}:/certs/cert.pem -v ${WORKSPACE}/terraform/:/work hashicorp/terraform plan -out=tfplan -input=false -var \"access_key=${AWS_KEY}\" -var \"secret_key=${AWS_SECRET}\" -var \"private_key_name=${params.Private_Key_Name}\" -var \"private_key=/certs/cert.pem\"  "
           }
         }
       }
@@ -57,11 +57,24 @@ pipeline {
       }
     }
 
-    stage("Configure OpenVON") {
+    stage("Configure OpenVPN") {
       steps {
-        sh "curl --insecure https://lidop:LiDOP2019@$(terraform output vpn_ip)/rest/GetAutologin > /tmp/lidop.conf"
+        sh "curl --insecure https://lidop:LiDOP2019@\$(sudo docker run --rm -w /work -v ${WORKSPACE}/terraform/:/work hashicorp/terraform output vpn_ip)/rest/GetAutologin > /tmp/lidop.conf"
         sh "sudo cp /tmp/lidop.conf /etc/openvpn/lidop.conf"
         sh 'sudo systemctl restart openvpn@lidop'
+      }
+    }
+
+    stage("Wait vor VPN connect") {
+      steps {
+        timeout(5) {
+          waitUntil {
+            script {
+              def r = sh script: 'wget --no-check-certificate -q https://172.10.10.10:443 -O /dev/null', returnStatus: true
+              return (r == 0);
+              }
+            }
+        }
       }
     }
 

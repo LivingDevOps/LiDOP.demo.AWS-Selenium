@@ -29,16 +29,16 @@
     retries: 100
     delay: 5
 
-  - name: Create sonarqube Builds
-    uri:
-      url: 'http://{{ ipaddress }}/jenkins/job/Environment/job/Create_Service/buildWithParameters?service=sonarqube'
-      method: POST
-      status_code: 201
-      user: "{{ root_user }}"
-      password: "{{ root_password }}"
-      force_basic_auth: yes
-      headers:
-        Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
+  # - name: Create sonarqube Builds
+  #   uri:
+  #     url: 'http://{{ ipaddress }}/jenkins/job/Environment/job/Create_Service/buildWithParameters?service=sonarqube'
+  #     method: POST
+  #     status_code: 201
+  #     user: "{{ root_user }}"
+  #     password: "{{ root_password }}"
+  #     force_basic_auth: yes
+  #     headers:
+  #       Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
 
   - name: Create selenium Builds
     uri:
