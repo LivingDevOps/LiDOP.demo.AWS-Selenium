@@ -70,9 +70,28 @@
         "Script": "./build/Connect_Vpn.Jenkinsfile",
         "Parameters": [
             {
-                "Name":"VPN_IP",
+                "Name":"AWS_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Key"
+            },
+            {
+                "Name":"AWS_Secret",
+                "Type":"Credential",
+                "CredentialTypeType":"org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl",
+                "Description":"AWS Secret"
+            },
+            {
+                "Name":"Private_Key_Name",
                 "Type":"String",
-                "Default": "0.0.0.0"
+                "Description":"Private Key Name",
+                "Default": ""
+            },
+            {
+                "Name":"Private_Key",
+                "Type":"Credential",
+                "CredentialTypeType":"com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey",
+                "Description":"AWS Private Key"
             }
         ]
     },
