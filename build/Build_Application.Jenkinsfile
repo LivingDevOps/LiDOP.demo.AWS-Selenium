@@ -84,7 +84,7 @@ pipeline {
             // itestp1 runs 1 testfile 
             sh "npm run-script itestp1"
             // itestp2 runs 50 testfile 
-            // sh "npm run-script itestp1"
+            // sh "npm run-script itestp2"
           }
         }
       }
