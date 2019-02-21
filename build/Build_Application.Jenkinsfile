@@ -12,11 +12,12 @@ pipeline {
   
   stages {
  
-    stage("Set Build Parameters") {
+    stage("Prepare Environment") {
       steps {
         script {
           currentBuild.displayName = "Build_App .${BUILD_NUMBER}";
         }
+        sh 'docker restart $(docker ps -q -f name=selenium)'
       }
     }
 
