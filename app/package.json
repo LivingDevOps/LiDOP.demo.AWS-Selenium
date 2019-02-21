@@ -7,6 +7,7 @@
     "start": "node ./src/app.js",
     "test": "mocha ./test/unit",
     "itestp1": "mocha-parallel-tests ./test/integration1 --timeout 120000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests",
+    "itest1": "mocha ./test/integration1 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests",
     "itestp2": "mocha-parallel-tests ./test/integration2 --timeout 120000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests"
   },
   "author": "Pascal Lauener",
@@ -16,11 +17,13 @@
     "pug": "latest"
   },
   "devDependencies": {
-    "chai": "latest",
-    "mocha": "latest",
-    "mocha-parallel-tests": "latest",
-    "mochawesome": "latest",
-    "request": "latest",
-    "selenium-webdriver": "latest"
+    "chai": "4.2.0",
+    "mocha": "6.0.0-1",
+    "mocha-parallel-tests": "2.0.6-0",
+    "mochawesome": "3.1.1",
+    "request": "2.88.0",
+    "selenium-webdriver": "3.6.0"
   }
 }
+
+
