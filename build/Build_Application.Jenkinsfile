@@ -23,8 +23,7 @@ pipeline {
 
     stage("Build") {
       steps {
-        sh 'docker build -t helloworldnodejs ./app'
-        sh 'docker run --rm -v ${PWD}/app:/work helloworldnodejs npm install'
+        sh 'docker run --rm -v ${PWD}/app:/work node:alpine npm install'
         sh 'docker build -t helloworldnodejs ./app'
       }
     }
