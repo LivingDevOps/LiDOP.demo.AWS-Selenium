@@ -8,7 +8,7 @@
     "test": "mocha ./test/unit",
     "itestp1": "mocha-parallel-tests ./test/integration1 --timeout 120000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests",
     "itest1": "mocha ./test/integration1 --timeout 10000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests",
-    "itestp2": "mocha-parallel-tests ./test/integration2 --timeout 120000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests"
+    "itestp2": "mocha-parallel-tests ./test/integration2 --max-parallel 16 --timeout 120000 --reporter mochawesome --reporter-options reportDir=.results/reports,reportFilename=tests"
   },
   "author": "Pascal Lauener",
   "license": "ISC",
