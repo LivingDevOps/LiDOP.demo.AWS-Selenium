@@ -23,8 +23,7 @@ pipeline {
 
     stage("Build") {
       steps {
-        sh 'docker build -t helloworldnodejs ./app'
-        sh 'docker run --rm -v ${PWD}/app:/work helloworldnodejs npm install'
+        sh 'docker run --rm -v ${PWD}/app:/work -w /work node:alpine npm install'
         sh 'docker build -t helloworldnodejs ./app'
       }
     }
@@ -103,7 +102,7 @@ pipeline {
   post { 
     always { 
       script {
-        currentBuild.description = "goto <a href=https://www.${PUBLIC_IPADDRESS}.xip.io/port/9100/>App</a>"
+        currentBuild.description = "goto <a href=https://www.${PUBLIC_IPADDRESS}.nip.io/port/9100/>App</a>"
         try {
           sh "docker rm -f helloworldnodejs-unittest"
         }
